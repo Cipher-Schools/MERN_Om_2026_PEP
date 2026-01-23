@@ -1,0 +1,38 @@
+.box {
+    background-color: lightblue;
+    border: 1px solid lightgray;
+    padding: 30px;
+    height: 80px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .flex {
+    display: flex;
+} */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.box:nth-child(odd) {
+    background-color: black;
+    color: white;
+}
+
+.box:nth-child(even) {
+    background-color: red;
+    color: white;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

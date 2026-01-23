@@ -1,0 +1,52 @@
+h2 {
+    color: blue;
+    font-size: 16px;
+}
+body {
+    background-color: rgb(219, 216, 216);
+}
+
+
+.card {
+    color: green;
+}
+
+#submit-btn {
+    background-color: blue;
+    color: white;
+}
+
+#h1 {
+    color: black;
+    font:20px "Fira Sans", sans-serif;
+}
+
+button {
+    background-color: red;
+    color: white;
+    border-radius: 10%;
+}
+
+/* .btn {
+    background-color: yellow;
+} */
+
+
+#navs {
+    border: 1px solid rgb(198, 197, 197);
+    padding: 20px 1px;
+    font-size: large;
+    background-color: rgb(248, 245, 245);
+    display: flex;
+    justify-content: space-around;
+    /* color: white; */
+}
+
+
+
+#profileImg {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+
+}
