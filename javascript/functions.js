@@ -48,4 +48,49 @@
 // console.log(num2);
 // let num2 = 10
 
+// const greet = function (name) {
+//     console.log('Hello', name);
+// }
 
+// greet('Ram');
+
+// function calculator(a, b, operation) {
+//     return operation(a, b)
+// }
+// const add = function (num1, num2) {
+//     return num1 + num2
+// }
+
+// const subtract = function (num1, num2) {
+//     return num1 - num2;
+// }
+
+// //  multiply
+// // divide  ------> condition num1/num2,  num2 !== 0
+
+
+// console.log(calculator(3, 5, add));
+// console.log(calculator(8, 4, subtract));
+
+
+// function sayHello() {
+//     console.log('Hello...');
+// }
+
+// function callMe(fn) {
+//     fn()
+// }
+
+// // callMe(sayHello)
+
+// callMe(function() {
+//     console.log('Hello World..........');
+// } );
+
+// const arr = [1,2,3,4,5,6].splice(1,2)
+// console.log(arr)
+
+const arr = [1, 3, 5, 6]
+// for (let num of arr) {
+//      console.log(num);
+// }
