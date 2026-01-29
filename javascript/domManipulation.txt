@@ -1,0 +1,25 @@
+
+* selecting element using id ( Selects a unique element by its ID.)
+document.getElementById('idName')
+
+* selecting element using class (Returns a collection of elements with a specific class name.)
+document.getElementsByClassName('className)
+
+* selecting element using tag (Returns a collection of elements with a specific tag name. )
+document.getElementByTagName('tagName)
+
+* Using Query Selector
+  i.   document.querySelector('#idName')     <--------- Selects a unique element with matching ID.
+  ii.  document.querySelector('.className)   <--------- Returns the first element matching a specific className.
+  iii. document.querySelectorAll('.className') <------- Returns a list (NodeList) of all elements matching the selector.
+  iv.  document.querySelector('tagName')    <--------- Returns the first element matching a specific TagName.
+
+
+To change color
+-> element.style.color = 'newcolor'   eg. h1.style.color = 'red'
+
+To change innerText
+-> element.innerText = 'New Text'  eg. h1.innerText = 'Hello World'
+
+To change innerHTML
+-> element.innerHTML = 'New HTML with Text'  eg. h1.innerHTML = '<b>Hello World</b>'

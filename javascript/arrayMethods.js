@@ -37,3 +37,6 @@ let stringArray = [ 'a', 'b', 'c', 'd']
 let newStr = stringArray.join('');
 console.log(newStr);
 
+const array1 = (Array.from('abchvdhbd'));
+
+console.log(Array.isArray(array1));
