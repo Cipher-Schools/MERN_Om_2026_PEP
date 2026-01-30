@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Name - Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
 </head>
 <body>
     <header>
@@ -69,7 +68,7 @@
         </section>
         <section>
             <h2>Contact Me</h2>
-            <form action="#profile" method="post">
+            <form action="#profile" method="post" id="form">
                 <label for="name">Name</label>
                 <input name="name" id="name" type="text" placeholder="Enter your name">
                 <br>
@@ -79,13 +78,18 @@
                 <label for="message">Message</label>
                 <textarea name="message" id="message" rows="3"></textarea>
                 <br>
+                <p id="error"></p>
+                <br>
                 <button type="submit">Submit</button>
             </form>
         </section>
+        
     </main>
     <footer>
         <p>&copy;2026 Om Jaiswal</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
 

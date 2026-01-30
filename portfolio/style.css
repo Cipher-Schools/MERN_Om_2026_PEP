@@ -43,7 +43,9 @@ button {
     /* color: white; */
 }
 
-
+#error {
+    color: red;
+}
 
 #profileImg {
     height: 150px;
