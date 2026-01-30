@@ -1,0 +1,30 @@
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div button {
+    height: 48px;
+    width: 48px;
+    border: none;
+    border-radius: 50%;
+    background-color: rgb(52, 52, 214);
+    color: white;
+    font-size: 24px;
+}
+/* button:hover {
+    background-color: red;
+} */
+
+p {
+    font-size: 24px;
+}
+
+#btn {
+    display: flex;
+    gap: 12px;
+}
