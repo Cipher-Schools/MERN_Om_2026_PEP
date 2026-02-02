@@ -3,6 +3,7 @@ const name = document.querySelector('#name');
 const email = document.querySelector('#email');
 const message = document.querySelector('#message');
 const error = document.querySelector('#error');
+const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -18,6 +19,11 @@ form.addEventListener('submit', (e) => {
     else if (!email.value.trim()) {
         alert('Email is required!');
     }
+
+    else if (!emailRegex.test(email.value.trim())) {
+        alert('Please enter valid email');
+    }
+
 
     else if (!message.value.trim()) {
         alert('You must add message to send it!');
