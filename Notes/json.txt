@@ -1,0 +1,23 @@
+JSON - JavaScript Object Notation
+
+-> It is a text format that is used to send data between client and server.
+
+It is similar to JavaScript objects.
+
+// JavaScript Object
+{
+    name: "Tom",
+    age: 23
+}
+
+
+//  JSON
+{
+    "name": "Tom",
+    "age": 23
+}
+
+
+JSON.parse -> string to JSON
+
+JSON.stringify -> JSON to string
