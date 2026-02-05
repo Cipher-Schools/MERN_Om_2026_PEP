@@ -40,3 +40,17 @@ console.log(newStr);
 const array1 = (Array.from('abchvdhbd'));
 
 console.log(Array.isArray(array1));
+
+
+
+let numArray = [1, 3, 6, 8, 9]
+
+// slice
+console.log(numArray.slice(1,4));
+console.log(numArray);
+
+// splice
+numArray.splice(1,2, 5, 7, 8, 9, 0, 4);
+console.log(numArray);
+
+

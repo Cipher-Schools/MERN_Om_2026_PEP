@@ -18,6 +18,6 @@ It is similar to JavaScript objects.
 }
 
 
-JSON.parse -> string to JSON
+JSON.parse -> JSON to JS object
 
-JSON.stringify -> JSON to string
+JSON.stringify -> JS Object to JSON
