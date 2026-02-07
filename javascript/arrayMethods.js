@@ -54,3 +54,12 @@ numArray.splice(1,2, 5, 7, 8, 9, 0, 4);
 console.log(numArray);
 
 
+
+const a = [2, 4, 6, 8]
+const c = [ 1, 2, 3]
+
+const b = [...a, 0, 3, ...c]
+
+console.log(b)
+
+

@@ -60,6 +60,7 @@ function changeColorPromise(newColor, delay) {
     })
 }
 
+
 changeColorPromise('red', 1000)
 .then(() => changeColorPromise('orange', 1000))
 .then(() => changeColorPromise('yellow', 1000))
