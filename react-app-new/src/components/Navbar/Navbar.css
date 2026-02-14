@@ -1,0 +1,9 @@
+
+.navbar-container {
+    background-color: lightgray;
+    padding: 15px 30px;
+}
+
+.navbar-container .active {
+    color: red;
+}

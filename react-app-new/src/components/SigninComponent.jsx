@@ -1,4 +1,4 @@
-function Signin() {
+function SigninComponent() {
 
     return (
         <>
@@ -6,3 +6,5 @@ function Signin() {
         </>
     )
 }
+
+export default SigninComponent;

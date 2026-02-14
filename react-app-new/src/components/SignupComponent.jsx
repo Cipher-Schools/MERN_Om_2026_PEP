@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-function Signup() {
+function SignupComponent() {
     // const [firstName, setFirstName] = useState('');
     // const [lastName, setLastName] = useState('');
     // const [email, setEmail] = useState('');
     // const [password, setPassword] = useState('');
     // const [dob, setDob] = useState('');
 
+    const navigate = useNavigate();
+    
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -50,6 +53,7 @@ function Signup() {
         if(validate()) {
             alert('Success');
             console.log('Your Form Data', formData);
+            navigate('/cart');
         }   
     }
         
@@ -82,7 +86,7 @@ function Signup() {
                 <br />
                 <input 
                     type="password" 
-                    name="passord"
+                    name="password"
                     placeholder="Password" 
                     onChange={handleChange}
                 />
@@ -102,4 +106,4 @@ function Signup() {
     )
 }
 
-export default Signup;
+export default SignupComponent;
