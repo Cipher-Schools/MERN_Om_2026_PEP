@@ -3,7 +3,7 @@ const http = require('http');
 const server = http.createServer((req, res) => {
     // res.end('Hello from Node.js server'); 
 
-    if (req.url === '/') {
+    if (req.url === '/' && req.method === 'GET') {
 
         const user = {
             name: 'Tom',
