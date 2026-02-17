@@ -1,0 +1,39 @@
+
+# Node.js
+-> Node.js is runtime environment for javascript.
+-> It allows JS to run outside the browser.
+-> Built in 2009 by Ryan Dahl.
+-> It uses Chrome's V8 engine.
+
+# V8 engine
+-> Converts JavaScript into machine code.
+-> Written in C++
+-> It is used by Chrome and Node.js
+
+# Node vs browser
+
+Broser provides:
+-> DOM
+-> document
+-> Window
+
+Node provides:
+-> File System access
+-> HTTP module
+-> OS interaction
+
+# libuv
+-> C library used by Node
+-> handles asynchronous I/O.
+-> Manages thread pool.
+-> Performs file, network, timer operations.
+
+# Event Loop
+-> Continuously checks if call stack is empty.
+->  moves callbacks from queue to call stack.
+-> It enables non-blocking behaviour.
+-> makes Node event-driven.
+
+
+# Server 
+-> A server is program that listens to requests and send response.
