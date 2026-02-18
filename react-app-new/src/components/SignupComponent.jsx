@@ -48,12 +48,25 @@ function SignupComponent() {
 
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(validate()) {
-            alert('Success');
-            console.log('Your Form Data', formData);
-            navigate('/cart');
+            // alert('Success');
+            // console.log('Your Form Data', formData);
+            // navigate('/cart');
+            
+            const response = await fetch('http://localhost:3000/user', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(formData)
+            })
+
+            const data = await response.json();
+
+            console.log(data);
+               
         }   
     }
         
