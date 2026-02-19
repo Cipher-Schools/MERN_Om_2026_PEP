@@ -58,8 +58,6 @@ app.get('/user/:id', async (req, res) => {
     //     res.status(404).json({ message: 'User not found'});
     //     return;
     // } 
-    
-
     // const user = req.user;
     const user = await User.findById(id);
     res.json(user);
@@ -67,30 +65,36 @@ app.get('/user/:id', async (req, res) => {
 })
 
 //  Strict PUT 
-app.put('/user/:id', (req, res) => {
-    const id = parseInt(req.params.id);
+app.put('/user/:id', async (req, res) => {
+    const id = req.params.id;
     const { firstName, lastName, email, password, dob } = req.body;
     if (!firstName || !lastName || !email || !password || !dob) {
         res.status(400).send('All fields are required');
     }
-    let user = users.find(u => u.userId === id);
+    // let user = users.find(u => u.userId === id);
+    const user = await User.findByIdAndUpdate(
+        id,
+        req.body,
+        { new: true }
+    )
     if (!user) {
         res.status(404).send('User Not Found');
         return;
     }
 
-    user = {
-        userId: id,
-        firstName: firstName || user.firstName,
-        lastName: lastName || user.lastName,
-        email: email || user.email,
-        password: password || user.password,
-        dob: dob || user.dob
-    }
+    res.json(user);
 
-    const index = users.findIndex(u => u.userId === id);
-    users[index] = user;
-    res.json(user); 
+    // user = {
+    //     userId: id,
+    //     firstName: firstName || user.firstName,
+    //     lastName: lastName || user.lastName,
+    //     email: email || user.email,
+    //     password: password || user.password,
+    //     dob: dob || user.dob
+    // }
+
+    // const index = users.findIndex(u => u.userId === id);
+    // users[index] = user; 
        
     
 })
@@ -121,16 +125,22 @@ app.patch('/user/:id', (req, res) => {
     
 })
 
-app.delete('/user/:id', (req, res) => {
-    const id = parseInt(req.params.id);
-    const index = users.findIndex(u => u.userId === id);
-    if(!index) {
-        res.status(404).send('The user you are trying to delete, does not exist');
+app.delete('/user/:id', async (req, res) => {
+    const id = req.params.id;
+    // const index = users.findIndex(u => u.userId === id);
+    // if(!index) {
+    //     res.status(404).send('The user you are trying to delete, does not exist');
+    //     return;
+    // }
+    // users.splice(index, 1);
+    try{
+        await User.findByIdAndDelete(id);
+        res.send('User deleted successfully');
         return;
+    } catch(err) {
+        console.log('Unable to delete, Try Again!');
     }
-    users.splice(index, 1);
-    res.send('User deleted successfully');
-    return;
+    
 })
 
 app.get('/', (req, res) => {
