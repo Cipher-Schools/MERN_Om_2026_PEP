@@ -3,7 +3,7 @@
 function checkUserExists(req, res, next) {
     const id = parseInt(req.params.id);
 
-    const user = users.find(u => u.userId === id);
+    const user = global.users.find(u => u.userId === id);
     
     if(!user) {
         res.status(404).json({ message: 'User not found' });

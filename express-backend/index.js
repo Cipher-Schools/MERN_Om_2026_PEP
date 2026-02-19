@@ -1,30 +1,36 @@
 const express = require('express');
 const cors = require('cors');
-const checkUserExists = require('./middleware/checkUserExists');
+// const checkUserExists = require('./middleware/checkUserExists');
 const PORT = 3000;
+const connectDB = require('./db');
+const User = require('./models/User');
 
 const app = express();
 
 app.use(express.json());
 app.use(cors());
 
-let users = [];
+connectDB();
 
-app.post('/user', (req, res) => {
+// let users = [];
+
+app.post('/user', async (req, res) => {
     const { firstName, lastName, email, password, dob } = req.body;
 
     if (!firstName || !lastName || !email || !password || !dob) {
         res.status(400).send('All fields are required');
     }
 
-    const existingUser = users.find(u => u.email === email);
+    // const existingUser = users.find(u => u.email === email);
+
+    const existingUser = await User.findOne({ email });
+
     if (existingUser) {
         res.status(400).send('User with this email already exists!');
         return;
     }
 
     const newUser = {
-        userId: Date.now(),
         // firstName: firstName,
         firstName,
         lastName,
@@ -33,26 +39,29 @@ app.post('/user', (req, res) => {
         dob
     }
 
-    users.push(newUser);
-    res.status(201).json({ message: "New user added successfully", newUser });
+    // users.push(newUser);
+    const user = await User.create(newUser);
+    res.status(201).json({ message: "New user added successfully", user });
     return;
 })
 
-app.get('/users', (req, res) => {
+app.get('/users', async (req, res) => {
+    const users = await User.find();
     res.json({ message: 'Here is all users data', users});
     return;
 })
 
-app.get('/user/:id', checkUserExists, (req, res) => {
-    // const id = parseInt(req.params.id);
+app.get('/user/:id', async (req, res) => {
+    const id = req.params.id;
     // const user = users.find(u => u.userId === id);
     // if(!user) {
     //     res.status(404).json({ message: 'User not found'});
     //     return;
     // } 
     
-    
-    const user = req.user;
+
+    // const user = req.user;
+    const user = await User.findById(id);
     res.json(user);
     return;
 })
@@ -181,4 +190,4 @@ app.listen(PORT, () => {
     console.log(`App is listening at port ${PORT}`);
 })
 
-module.exports = { users };
+// module.exports = { users };
