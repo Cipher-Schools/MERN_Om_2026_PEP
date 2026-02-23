@@ -4,6 +4,9 @@ const cors = require('cors');
 const PORT = 3000;
 const connectDB = require('./db');
 const User = require('./models/User');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const authenticate = require('./middleware/authMiddleware');
 
 const app = express();
 
@@ -14,11 +17,12 @@ connectDB();
 
 // let users = [];
 
-app.post('/user', async (req, res) => {
+app.post('/signup', async (req, res) => {
     const { firstName, lastName, email, password, dob } = req.body;
 
     if (!firstName || !lastName || !email || !password || !dob) {
         res.status(400).send('All fields are required');
+        return;
     }
 
     // const existingUser = users.find(u => u.email === email);
@@ -30,29 +34,76 @@ app.post('/user', async (req, res) => {
         return;
     }
 
+    const hashedPwd = await bcrypt.hash(password, 10);
+
     const newUser = {
         // firstName: firstName,
         firstName,
         lastName,
         email,
-        password,
+        password: hashedPwd,
         dob
     }
+    
 
     // users.push(newUser);
     const user = await User.create(newUser);
-    res.status(201).json({ message: "New user added successfully", user });
+
+    const token = jwt.sign(
+        { id: user._id },
+        'S3cRet',
+        { expiresIn: '1d' }
+    )
+    res.status(201).json({ message: "New user added successfully", user, token });
     return;
 })
 
-app.get('/users', async (req, res) => {
+app.post('/signin', async (req, res) => {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+        res.send('Email and Password are required');
+        return;
+    }
+
+    const user = await User.findOne({ email });
+    if (!user) {
+        res.status(404).json({ message: 'User does not exist'});
+        return;
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if(!isMatch) {
+        res.status(401).json({ message: 'Invalid password'});
+        return;
+    }
+
+    const userData = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email
+    }
+
+    const token = jwt.sign(
+        { id: user._id },
+        'S3cRet',
+        { expiresIn: '1d' }
+    )
+
+    res.json({ message: 'Logged in successfully', userData, token });
+    return;
+})
+
+app.get('/users', authenticate, async (req, res) => {
     const users = await User.find();
     res.json({ message: 'Here is all users data', users});
     return;
 })
 
-app.get('/user/:id', async (req, res) => {
-    const id = req.params.id;
+app.get('/user', authenticate, async (req, res) => {
+    // const id = req.params.id;
+    const id = req.userId
     // const user = users.find(u => u.userId === id);
     // if(!user) {
     //     res.status(404).json({ message: 'User not found'});
