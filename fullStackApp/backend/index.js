@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from 'dotenv';
 import { connectDB } from "./config/db.js";
 import authRoutes from './routes/authRoutes.js'
+import stockRoutes from './routes/stockRoutes.js'
 
 dotenv.config();
 connectDB();
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 // app.use('/api/transactions', transactionRoutes);
+app.use('/api/stocks', stockRoutes);
 
 // app.get('/', (req, res) => {
 //     res.send('Hello world');
