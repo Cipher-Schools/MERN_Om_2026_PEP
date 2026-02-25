@@ -24,7 +24,7 @@ export const authorizeAdmin = async(req, res, next) => {
 }
 
 export const authorizeUser = async(req, res, next) => {
-    if(req.user.role !=== 'user') {
+    if(req.user.role !== 'user') {
         res.status(403).json({ message: 'UNAUTHORIZED: Only users are allowed' });
         return;
     }
