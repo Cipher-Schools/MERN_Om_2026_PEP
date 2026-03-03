@@ -1,0 +1,100 @@
+ SDLC - Software Development Life Cycle
+    
+    Software -> App (like your MERN project)
+    Development -> Building it
+    Life Cycle -> Full journey
+
+    -> When we build a software project, we don't just randomly start 
+       coding. There must be some organized way to build software.
+       That organized way is called SDLC.
+
+    -> SDLC means the full journey of building software from idea to
+        final product.
+
+
+SDLC Steps
+
+1. Requirement -> What do users want?
+
+2. Design -> How will we build it?
+
+3. Development -> Writing code
+
+4. Testing -> Checking for bugs
+
+5. Deployment -> Making it live
+
+6. Maintenance -> Fixing and updating
+
+
+=> There are different ways companies follow SDLC process.
+
+    -> Two popular approaches are:
+
+    1. Waterfall (Traditional Method)
+        -> In this method, we complete one step fully, then move to the 
+        next step.
+
+        Step 1 → Step 2 → Step 3 → Step 4
+
+        problem: No going back easily.
+            -> If client says after development:
+                “I want change.”
+                    It becomes difficult.
+
+    
+    2. Agile (Modern Flexible Method)
+        -> Agile was introduced because software requirements change often, 
+        and companies needed a more flexible way.
+
+        -> Agile is a way to manage projects by breaking them into smaller
+        parts. It focuses on working together and making constant improvements.
+
+        -> Here we complete projects in sprint
+            Sprint = small time period (like 2 weeks) where small features 
+            are built.
+
+
+
+
+Before Devops
+    -> Earlier companies had two teams
+    1. Developers -> write code
+    2. Operations team -> Deploy & manage servers
+
+    Developer didn’t know server.
+    Server team didn’t know code.
+
+    workflow
+    Developers write code -> send zip file to ops team -> Ops team deploys it
+     -> something breaks -> Ops blames Dev and Dev blames Ops.
+
+    # It works on my machine. 
+
+    Problems:
+    Slow release, Miscommunication, Manual Deployment, No automation,
+    Downtime, Very stressful release
+
+* To solve these problems Devops was created.
+
+
+DEVOPS = DEV + OPS
+
+-> DevOps is a way of working where developers and operations work 
+together and automate the process of building and deploying software.
+
+Automation = Using tools/scripts so humans don’t manually repeat tasks.
+
+
+DevOps Lifecycle:
+
+    Plan -> Code -> Build -> Test -> Deploy -> Monitor -> Repeat
+
+    Plan -> Decide features
+    Code -> Write program
+    Build -> Prepare app to run
+    Test -> Check for bugs
+    Deploy -> Put on server
+    Monitor -> Watch if server is running fine
+
+    Repeat -> Repeat continuously.

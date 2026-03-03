@@ -5,10 +5,11 @@ export const searchStock = async(req, res) => {
 
     try {
         const response = await axios.get(
-            'https://www.alphavantage.co/query',
+            // 'https://www.alphavantage.co/query',
+            'https://api.twelvedata.com/quote',
             {
                 params: {
-                    function: 'GLOBAL_QUOTE',
+                    // function: 'GLOBAL_QUOTE',
                     symbol,
                     apikey: process.env.STOCK_API_KEY
                 }
