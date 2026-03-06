@@ -1,0 +1,123 @@
+                            LINUX
+                            
+Linux:
+    -> Linux is an operating system commonly used on servers and cloud platforms.
+
+    Why Linux is Important:
+    -> Real applications such as Netflix, Amazon, Google, and Facebook run on servers 
+    instead of personal laptops.
+
+    Server:
+    -> A server is a computer that provides services to other computers over a network.
+
+    Examples of server services:
+    ->Hosting websites
+    ->Running APIs
+    ->Storing databases
+    ->Serving files
+
+    Example:
+    -> When a user opens a website like Google, the browser sends a request to Google's servers, 
+    and the server responds with the required data.
+
+    Reasons Linux is widely used:
+        -> Free and open source
+        -> Very stable (servers can run for long periods)
+        -> Secure
+        -> Highly customizable
+        -> Efficient for servers
+
+    Many large companies use Linux for their infrastructure.
+
+
+Operating System (OS)
+    -> An Operating System (OS) is software that manages computer hardware and allows 
+    programs to run.
+    -> It acts as an interface between applications and hardware.
+
+    Examples:
+    Operating System	Common Usage
+    Windows    ->       Personal computers
+    macOS	   ->       Apple computers
+    Linux	   ->       Servers and cloud systems
+
+    Responsibilities of an Operating System:
+        An OS manages:
+            -> CPU
+            -> Memory (RAM)
+            -> Storage
+            -> Input/Output devices
+            -> Running programs
+
+
+Linux Kernel and Distributions:
+
+    Linux Kernel:
+
+    # Linux itself is technically the kernel of the operating system.
+
+    -> A kernel is the core component of the operating system that interacts directly
+     with hardware.
+
+    Responsibilities of the kernel:
+        -> Managing CPU usage
+        -> Allocating memory
+        -> Controlling hardware devices
+        -> Managing system processes
+
+    Example:
+        When a program requests memory, the kernel allocates RAM for that program.
+
+
+    Linux Distribution:
+        -> A Linux distribution is a complete operating system built around the Linux kernel.
+
+        A distribution includes:
+            -> Linux kernel
+            -> System utilities
+            -> Package manager
+            -> User interface
+
+        Examples of Linux Distributions:
+            -> Ubuntu
+            -> Debian
+            -> CentOS
+
+
+
+Virtual Machines (VM)
+    A Virtual Machine (VM) is a computer created using software that behaves like a real computer.
+
+    It has:
+        -> Virtual CPU
+        -> Virtual RAM
+        -> Virtual disk
+        -> Operating system
+
+    Host OS	 --> Original operating system (Windows/macOS)
+    Guest OS --> Operating system running inside the VM
+
+    Example architecture:
+
+        Laptop Hardware
+        ↓
+        Host OS (Windows/macOS)
+        ↓
+        VirtualBox
+        ↓
+        Ubuntu Linux (VM)
+
+
+VirtualBox
+    -> Oracle VM VirtualBox is software used to create and run virtual machines.
+    -> It allows users to install operating systems such as Linux inside their existing system.
+
+ISO File
+    -> An ISO file is a disk image used to install operating systems.
+    -> It acts like a digital installation disk.
+    Example: Ubuntu installation file.
+
+RAM (Random Access Memory)
+    -> RAM is temporary memory used by running programs.
+    -> Programs load data into RAM while executing.
+    -> More RAM allows the system to run more applications efficiently.
