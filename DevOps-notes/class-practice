@@ -1,0 +1,28 @@
+Number    Permission
+read       4
+write      2
+execute    1
+
+
+4+2+1 = 7    <---- Permission to read, write and execute
+4            <------ read Permission
+4+1 = 5      <----read and execute Permissions
+4+2 =6       <---------read and write
+
+
+
+Cron -> task schduling system in linux
+    -> a system that runs tasks based on time.
+
+examples - run database backup every night,
+            delete temp files every week,
+            restart a service every hour,
+            send reports every morning
+
+
+vagrant -> vagrant is a tool used to create and manage virtual
+machines using code
+
+
+provisioning -> automatically setting up software inside a machine
+
