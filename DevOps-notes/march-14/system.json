@@ -1,0 +1,5 @@
+{
+ "application": "stock-app",
+ "port": 4000,
+ "database": "postgres"
+}

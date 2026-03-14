@@ -1,0 +1,19 @@
+{
+ "server": [
+  {
+   "name": "web-server",
+"ip": "192.168.0.0",
+"status": "running"
+},
+{
+"name": "db-server",
+"ip": "192.168.0.1",
+"status": "stopped"
+},
+{
+"name": "cache-server",
+"ip": "192.168.0.2",
+"status": "running"
+}
+]
+}

@@ -1,0 +1,13 @@
+application:
+  name: stock-app
+  version: 1.0
+
+server:
+  port: 4000
+  environment: development
+
+features:
+  - login
+  - signup
+  - user dashboard
+  - admin dashboard

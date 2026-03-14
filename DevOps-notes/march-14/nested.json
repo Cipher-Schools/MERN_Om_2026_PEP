@@ -1,0 +1,7 @@
+{
+  "name": "Jerry",
+  "server": {
+     "name": "web-server",
+     "port": 5000
+  }
+}

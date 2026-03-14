@@ -30,3 +30,71 @@ provisioning -> automatically setting up software inside a machine
 
 -----------------------------------------------
 
+
+name: web-server  //yaml
+port: 3000
+
+
+{
+    "name": "web-server",   //json
+    "port": 3000
+}
+
+
+sever:
+  name: web-server
+  port: 3000
+
+
+{
+    "server": {
+        "name": "web-server",
+        "port": 3000
+    }
+}
+
+debug: true
+enabled: false
+database: null
+
+
+.yaml
+.yml
+
+
+language = ["js", "ts", "c++", "python", "java"]
+
+language:
+  - js
+  - ts
+  - c++
+  - python
+  - java
+
+language: [js, ts, c++, python, java]
+
+user: 
+  name: Om
+  role: admin
+
+user: {name: Om, role: admin}
+
+
+  sever:
+    name: web-server
+    port: 3000
+    database:
+      host: localhost
+      port: 5432
+
+
+# this is comment
+
+
+message: |
+  Hello Students
+  Welcome to Devops Class
+  Today we are learning YAML
+
+
+  
