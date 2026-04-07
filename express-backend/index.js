@@ -17,6 +17,9 @@ connectDB();
 
 // let users = [];
 
+// this is comment
+
+
 app.post('/signup', async (req, res) => {
     const { firstName, lastName, email, password, dob } = req.body;
 

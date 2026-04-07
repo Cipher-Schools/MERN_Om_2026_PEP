@@ -235,6 +235,7 @@ docker network create my_network
 ```
 docker run -d -p 3000:3000 --name <whatevername> --network my_network image_tag
 ```
+
 - Start mongo on the same network
 ```
 docker run -d -v volume_database:/data/db --name <mongoName> --network my_custom_network -p 27017:27017 mongo
@@ -243,6 +244,12 @@ docker run -d -v volume_database:/data/db --name <mongoName> --network my_custom
 - Check the logs to ensure the db connection is successful
 ```
 docker logs <container_id>
+```
+
+- Better way, pass env
+
+```
+docker run -d --name myApp --network my-network -p 3000:3000 -e MONGO_URI=mongodb://<mongoName>:27017/myapp express-app
 ```
 
 - Try to visit an endpoint and ensure you are able to talk to the database
