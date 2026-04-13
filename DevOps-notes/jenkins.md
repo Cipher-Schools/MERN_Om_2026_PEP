@@ -255,7 +255,28 @@ docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
 
 2. Paste the password from Phase 3 and install Suggested Plugins.
 
-3. Install Docker Plugins: * Go to Manage Jenkins -> Plugins -> Available Plugins.
+3. Install docker on jenkins:
+    1. Enter the container as root
+    ```
+    docker exec -u 0 -it jenkins bash
+    ```
+
+    2. Install the small Docker CLI binary (The Fast Way)
+    ```
+    curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-26.1.4.tgz -o docker.tgz
+    tar xzvf docker.tgz
+    mv docker/docker /usr/local/bin/
+    rm -rf docker.tgz docker/
+    ```
+    3. Verify and Exit
+    ```
+    docker --version
+
+    exit
+
+    ```
+
+4. Install Docker Plugins: * Go to Manage Jenkins -> Plugins -> Available Plugins.
 
     - Search and install "Docker" and "Docker Pipeline".
 
