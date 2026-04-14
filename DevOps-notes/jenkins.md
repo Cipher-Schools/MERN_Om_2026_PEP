@@ -326,7 +326,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/YourUsername/YourRepo.git'  
+                git branch:'main', url:'https://github.com/YourUsername/YourRepo.git'  
             }
         }
         stage('Build & Deploy') {
