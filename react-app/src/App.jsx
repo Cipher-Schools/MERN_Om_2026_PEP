@@ -51,6 +51,7 @@ class Counter extends React.Component {
     return (
       <>
       <h1>Count: {this.state.count}</h1>
+      <h2>Hello, just adding new code</h2>
       <button onClick={ this.inscrease }>Inscrease</button>
       </>
     )
