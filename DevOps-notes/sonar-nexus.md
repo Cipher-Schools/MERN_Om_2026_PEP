@@ -48,7 +48,7 @@ EXPOSE 5000
 CMD ["node", "index.js"]
 ```
 
-11. BUILD DOCKER IMAGE
+11. BUILD ARTIFACT (DOCKER IMAGE)
 
 docker build -t demo-app:v1 .
 
@@ -64,4 +64,34 @@ Get password:
 docker exec nexus cat /nexus-data/admin.password
 
 
-CREATE DOCKER REPOSITORY
+13. CREATE DOCKER REPOSITORY
+- name: docker-repo
+- port: 8082
+
+
+14. TAG IMAGE
+```
+docker tag demo-app:v1 localhost:8082/docker-repo/demo-app:v1
+```
+
+15. PUSH TO NEXUS
+docker push localhost:8082/docker-repo/demo-app:v1
+
+16. VERIFY
+
+Go to Nexus and check 
+
+
+17. FINAL CHECK (IMPORTANT)
+
+Remove local image:
+
+docker rmi demo-app:v1
+
+Pull from Nexus:
+
+docker pull localhost:8082/demo-app:v1
+
+Run:
+
+docker run -p 5000:5000 localhost:8082/demo-app:v1
