@@ -103,24 +103,16 @@ docker run -p 5000:5000 localhost:8082/demo-app:v1
 
 
 
-## AUTOMATATION ( Step by step )
+# AUTOMATATION ( Step by step )
 
 #### 1. Create EC2 and add ports 22, 3000, 8081, 8082, 9000
+- t2.medium or large with 20GB storage.
 
 #### 2. ssh and follow:
 
 ```
-# 1. Create 4GB of extra memory
-sudo fallocate -l 4G /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile
-sudo swapon /swapfile
-echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
 
-# 2. Fix the limit for SonarQube (Important!)
-sudo sysctl -w vm.max_map_count=262144
-
-# 3. Install Docker
+# Install Docker
 sudo apt update && sudo apt install docker.io -y
 sudo usermod -aG docker ubuntu
 # !!! NOW LOGOUT AND LOG BACK IN TO APPLY DOCKER PERMISSIONS !!!
@@ -129,12 +121,30 @@ sudo usermod -aG docker ubuntu
 
 #### 3. Run images of Nexus & Sonar in docker containers
 
-```
-# 1. Start Nexus (Warehouse)
-docker run -d -p 8081:8081 -p 8082:8082 --name nexus sonatype/nexus3
 
-# 2. Start SonarQube (Inspector)
-docker run -d -p 9000:9000 --name sonarqube sonarqube:lts-community
+- 1. Start Nexus (Warehouse)
+```
+docker rm -f nexus || true
+
+docker run -d \
+  --name nexus \
+  -p 8081:8081 \
+  -p 8082:8082 \
+  --restart unless-stopped \
+  sonatype/nexus3
+
+```
+
+- 2. Start SonarQube (Inspector)
+
+```
+docker rm -f sonarqube || true
+
+docker run -d \
+  --name sonarqube \
+  -p 9000:9000 \
+  --restart unless-stopped \
+  sonarqube:lts
 ```
 
 #### 4. Setup the Warehouse (Nexus) manually:
@@ -197,44 +207,53 @@ name: MERN Production Pipeline
 
 on:
   push:
-    branches: [ "main" ]  # Pipeline runs only when code is pushed to main
+    branches: ["main"]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # --- STEP 1: GET THE CODE ---
+      # --- STEP 1: CHECKOUT CODE ---
       - name: Checkout Code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Necessary for better SonarQube analysis
+          fetch-depth: 0
 
-      # --- STEP 2: THE INSPECTOR (SONARQUBE) ---
+      # --- STEP 2: CHECK SONARQUBE ---
+      - name: Check SonarQube Availability
+        run: |
+          curl -f ${{ secrets.SONAR_HOST_URL }}/api/system/status || exit 1
+
+      # --- STEP 3: SONARQUBE ANALYSIS ---
       - name: SonarQube Code Analysis
         uses: sonarsource/sonarqube-scan-action@master
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-        # This step sends the code to your EC2 SonarQube to check for bugs
 
-      # --- STEP 3: THE COOKING (DOCKER BUILD) ---
+      # --- STEP 4: BUILD IMAGE ---
       - name: Build Docker Image
         run: docker build -t my-mern-app:latest .
 
-      # --- STEP 4: THE WAREHOUSE LOGIN (NEXUS) ---
-      - name: Login to Nexus Warehouse
+      # ✅ ADD THIS STEP (CI FIX)
+      - name: Configure Docker for Nexus (CI)
         run: |
-          echo "${{ secrets.NEXUS_PASSWORD }}" | docker login ${{ secrets.EC2_HOST }}:8082 -u admin --password-stdin
+          echo '{ "insecure-registries": ["${{ secrets.EC2_HOST }}:8082"] }' | sudo tee /etc/docker/daemon.json
+          sudo systemctl restart docker
 
-      # --- STEP 5: STORE IN WAREHOUSE (NEXUS PUSH) ---
+      # --- STEP 5: LOGIN TO NEXUS ---
+      - name: Login to Nexus
+        run: |
+          echo "${{ secrets.NEXUS_PASSWORD }}" | docker login http://${{ secrets.EC2_HOST }}:8082 -u admin --password-stdin
+
+      # --- STEP 6: PUSH IMAGE ---
       - name: Tag and Push to Nexus
         run: |
-          # We give it a version tag and push it through the 'Side Door' (8082)
           docker tag my-mern-app:latest ${{ secrets.EC2_HOST }}:8082/my-mern-app:latest
           docker push ${{ secrets.EC2_HOST }}:8082/my-mern-app:latest
 
-      # --- STEP 6: THE DELIVERY (DEPLOY TO EC2) ---
+      # --- STEP 7: DEPLOY ---
       - name: Deploy to EC2 via SSH
         uses: appleboy/ssh-action@master
         with:
@@ -242,17 +261,26 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            # 1. Log in to Nexus inside the EC2
-            echo "${{ secrets.NEXUS_PASSWORD }}" | docker login ${{ secrets.EC2_HOST }}:8082 -u admin --password-stdin
-            
-            # 2. Pull the clean, inspected image from the warehouse
-            docker pull ${{ secrets.EC2_HOST }}:8082/my-mern-app:latest
-            
-            # 3. Stop and remove the old version if it's running
+            # Ensure Nexus is running
+            if ! docker ps | grep nexus; then
+              docker start nexus || echo "Nexus not found"
+            fi
+
+            # Login to Nexus (LOCAL)
+            echo "${{ secrets.NEXUS_PASSWORD }}" | docker login http://localhost:8082 -u admin --password-stdin
+
+            # Pull latest image
+            docker pull localhost:8082/my-mern-app:latest
+
+            # Stop old container
             docker stop mern-app-container || true
             docker rm mern-app-container || true
-            
-            # 4. Run the new version on port 5000
-            docker run -d -p 5000:5000 --name mern-app-container ${{ secrets.EC2_HOST }}:8082/my-mern-app:latest
+
+            # Run new container
+            docker run -d -p 3000:3000 --name mern-app-container localhost:8082/my-mern-app:latest
 
 ```
+
+<!-- RUN this on EC2
+echo '{ "insecure-registries":["'$(curl -s http://checkip.amazonaws.com)':8082"] }' | sudo tee /etc/docker/daemon.json
+sudo systemctl restart docker -->
